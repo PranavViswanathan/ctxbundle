@@ -130,7 +130,9 @@ def _build_spec(
     patterns.extend(_read_gitignore(root))
     patterns.extend(ALWAYS_SKIP_GLOBS)
     patterns.extend(extra_ignores)
-    return pathspec.PathSpec.from_lines("gitwildmatch", patterns)
+    # GitIgnoreSpec is the modern, non-deprecated equivalent of
+    # PathSpec.from_lines("gitwildmatch", ...).
+    return pathspec.GitIgnoreSpec.from_lines(patterns)
 
 
 def _looks_binary(sample: bytes) -> bool:

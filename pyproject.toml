@@ -49,3 +49,9 @@ Issues = "https://github.com/pranavviswanathan/ctxbundle/issues"
 
 [tool.setuptools.packages.find]
 include = ["contextpack*"]
+exclude = ["tests*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+addopts = "-ra --strict-markers"

@@ -1,7 +1,7 @@
 # ctxbundle release automation.
 # Run `make help` for the full list of targets.
 
-.PHONY: help install build check clean pack publish publish-test \
+.PHONY: help install test ci build check clean pack publish publish-test \
         version bump-patch bump-minor bump-major release _bump _check-clean
 
 PYTHON     ?= python3
@@ -42,6 +42,13 @@ clean:  ## Remove build artifacts and caches
 pack: install  ## Run the CLI on this repo (smoke test)
 	$(CLI_BIN) . --out /tmp/$(PACKAGE)-self.txt
 	@echo "Wrote /tmp/$(PACKAGE)-self.txt"
+
+test: install  ## Run pytest
+	$(BIN)/pytest
+
+ci: install  ## Run the same checks CI runs (test + build + twine check)
+	$(BIN)/pytest
+	@$(MAKE) -s check
 
 # ----- build & publish -----------------------------------------------------
 
@@ -85,8 +92,9 @@ _bump:
 
 # ----- one-shot release ----------------------------------------------------
 
-release:  ## Bump patch, commit, tag, push to GitHub, upload to PyPI
+release:  ## Run tests, bump patch, commit, tag, push, publish to PyPI
 	@$(MAKE) -s _check-clean
+	@$(MAKE) -s test
 	@$(MAKE) -s bump-patch
 	@NEW=$$(sed -n 's/^version = "\(.*\)"/\1/p' $(PYPROJECT) | head -1); \
 	git add $(PYPROJECT) $(INIT_FILE); \
