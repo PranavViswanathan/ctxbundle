@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "ctxbundle"
-version = "0.1.0"
+version = "0.1.1"
 description = "Bundle a code repository into a single LLM-ready text file."
 readme = "README.md"
 requires-python = ">=3.8"
@@ -41,7 +41,7 @@ dev = [
 ]
 
 [project.scripts]
-contextpack = "contextpack.cli:main"
+ctxbundle = "contextpack.cli:main"
 
 [project.urls]
 Homepage = "https://github.com/pranavviswanathan/ctxbundle"
