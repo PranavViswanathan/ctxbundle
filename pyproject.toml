@@ -1,0 +1,51 @@
+[build-system]
+requires = ["setuptools>=64", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ctxbundle"
+version = "0.1.0"
+description = "Bundle a code repository into a single LLM-ready text file."
+readme = "README.md"
+requires-python = ">=3.8"
+license = { text = "MIT" }
+authors = [
+    { name = "Pranav Viswanathan", email = "pranav.viswanathan11@gmail.com" },
+]
+keywords = ["llm", "context", "repository", "code", "bundling", "ai"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Environment :: Console",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Software Development",
+    "Topic :: Utilities",
+]
+dependencies = [
+    "click>=8.0",
+    "pathspec>=0.11",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7",
+    "build>=1.0",
+    "twine>=4.0",
+]
+
+[project.scripts]
+contextpack = "contextpack.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/pranavviswanathan/ctxbundle"
+Issues = "https://github.com/pranavviswanathan/ctxbundle/issues"
+
+[tool.setuptools.packages.find]
+include = ["contextpack*"]
